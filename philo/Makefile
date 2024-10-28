@@ -6,15 +6,16 @@
 #    By: vpelc <vpelc@student.s19.be>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/10 17:59:30 by vpelc             #+#    #+#              #
-#    Updated: 2024/09/10 18:00:42 by vpelc            ###   ########.fr        #
+#    Updated: 2024/10/26 19:15:36 by vpelc            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 # Standard
-NAME                = 
+NAME                = philo
 
 # Directories
+LIBFT				= ./libft/libft.a
 INC                 = include/
 SRC_DIR             = src/
 OBJ_DIR             = obj/
@@ -24,17 +25,19 @@ CC                  = cc
 CFLAGS              = -Wall -Werror -Wextra -g
 RM                  = rm -f
 
-# Additional flags
-INCLUDES            = -I /usr/local/include
-
 # Source files
-SRCS                = main.c
+SRCS                = main.c init_philo.c send_error.c debug.c check_args.c
 
 # File paths
 SRC                 = $(addprefix $(SRC_DIR), $(SRCS))
 OBJ                 = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 
 all:                $(NAME)
+
+$(LIBFT):
+	@echo "Compiling libft..."
+	@make -C ./libft
+	@echo "\033[1;32mLibft.a has been created.\033[0m"
 
 obj:
 	@if [ -d $(OBJ_DIR) ]; then \
@@ -47,26 +50,28 @@ obj:
 # Compile object files from source files
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(@D)
-	@$(CC) -g $(CFLAGS) -I$(INC) $(INCLUDES) -c $< -o $@
+	@$(CC) -g $(CFLAGS) -I$(INC) -c $< -o $@
 #	@echo "\033[1;32mFile $@ created.\033[0m";
 
-$(NAME): $(OBJ) 
+$(NAME): $(LIBFT) $(OBJ) 
 	@echo "\033[1;36mCompiling...\033[0m"
-	@$(CC) $(CFLAGS) $(INCLUDES) $(OBJ) -o $(NAME) $(LIBRARIES)
+	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
 	@echo "\033[1;32mDone.\033[0m"
 
 clean:
 	@echo "\033[1;35mRemoving obj/...\033[0m"
-	@$(RM) -r $(OBJ_DIR) 
+	@$(RM) -r $(OBJ_DIR)
+	@echo "\033[1;35mRemoving libft...\033[0m"
+	@make clean -C ./libft
 	@echo "\033[1;32mAll Done for clean.\033[0m"
 
 fclean: clean
-	@echo "\033[1;35mRemoving...\033[0m"
+	@echo "\033[1;35mRemoving all...\033[0m"
 	@$(RM) $(NAME)
+	@echo "\033[1;35mRemoving all libft...\033[0m"
+	@make fclean -C ./libft
 	@echo "\033[1;32mDone.\033[0m"
 
 re: fclean obj all
-
-bonus: all
 
 .PHONY: all obj clean fclean re

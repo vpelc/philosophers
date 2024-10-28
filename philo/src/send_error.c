@@ -1,34 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.h                                             :+:      :+:    :+:   */
+/*   send_error.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vpelc <vpelc@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/10 18:01:33 by vpelc             #+#    #+#             */
-/*   Updated: 2024/09/10 18:12:46 by vpelc            ###   ########.fr       */
+/*   Created: 2024/09/11 14:22:48 by vpelc             #+#    #+#             */
+/*   Updated: 2024/09/11 14:28:39 by vpelc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAIN_H
-# define MAIN_H
+#include "../include/main.h"
 
-# include <unistd.h>
-# include <pthread.h>
-# include <sys/time.h>
-# include <stdlib.h>
-
-typedef struct s_philo
+void	send_error(char *err)
 {
-	int				id;
-	int				meals;
-	int				sleeps;
-	pthread_t		thread;
-	pthread_mutex_t	own_fork;
-	pthread_mutex_t	*next_fork;
-	
-
-}	t_philo;
-
-
-#endif
+	write(2, "\033[1;31mError!\033[0m", 17);
+	write(2, err, ft_strlen(err));
+	exit(1);
+}
