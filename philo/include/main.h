@@ -6,7 +6,7 @@
 /*   By: vpelc <vpelc@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:01:33 by vpelc             #+#    #+#             */
-/*   Updated: 2024/10/26 19:09:20 by vpelc            ###   ########.fr       */
+/*   Updated: 2024/10/28 19:02:57 by vpelc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_life
 
 /*			SRC				*/
 void				init_life(int argc, char *argv[], t_life *life);
+void				check_args(int argc, char *argv[]);
 
 void				send_error(char *err);
 

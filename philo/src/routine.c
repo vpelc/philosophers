@@ -1,36 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_args.c                                       :+:      :+:    :+:   */
+/*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vpelc <vpelc@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/11 14:21:32 by vpelc             #+#    #+#             */
-/*   Updated: 2024/10/28 19:05:58 by vpelc            ###   ########.fr       */
+/*   Created: 2024/10/28 19:07:40 by vpelc             #+#    #+#             */
+/*   Updated: 2024/10/30 18:06:55 by vpelc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/main.h"
 
-void	check_args(int argc, char *argv[])
+void	routine(void)
+{
+	printf("I'm ok\n");
+}
+
+int	philo_loop(t_life life)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	if (argc < 5)
-		send_error("\n. Not enough arguments\n\n");
-	if (argc > 6)
-		send_error("\n. Too much arguments\n\n");
-	while (i < argc)
+	while (i < life.nbr_philo)
 	{
-		j = 0;
-		while (argv[i][j])
-		{
-			if (!(ft_isdigit(argv[i][j])))
-				send_error("\n. Arguments contains non digit char\n\n");
-			j++;
-		}
+		if (pthread_create(&life.philo_arr[i], NULL, routine, NULL) != 0)
+			return (i);
 		i++;
 	}
+	i = 0;
+	while (i < life.nbr_philo)
+	{
+		if (pthread_join(&life.philo_arr[i], NULL) != 0)
+			return (i);
+		i++;
+	}
+	return (0);
 }
