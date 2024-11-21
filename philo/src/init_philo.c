@@ -6,7 +6,7 @@
 /*   By: vpelc <vpelc@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 13:35:23 by vpelc             #+#    #+#             */
-/*   Updated: 2024/11/20 17:14:04 by vpelc            ###   ########.fr       */
+/*   Updated: 2024/11/21 16:32:13 by vpelc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,4 @@ void	init_life(int argc, char *argv[], t_life *life)
 	if (argc == 6)
 		life->nbr_meals = ft_atoi(argv[5]);
 	life->philo_arr = init_philo(life);
-	pthread_mutex_init(&life->monitor, NULL);
 }

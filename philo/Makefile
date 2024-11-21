@@ -6,33 +6,33 @@
 #    By: vpelc <vpelc@student.s19.be>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/10 17:59:30 by vpelc             #+#    #+#              #
-#    Updated: 2024/11/15 16:02:18 by vpelc            ###   ########.fr        #
+#    Updated: 2024/11/21 17:35:48 by vpelc            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 # Standard
-NAME                = philo
+NAME				= philo
 
 # Directories
 LIBFT				= ./libft/libft.a
-INC                 = include/
-SRC_DIR             = src/
-OBJ_DIR             = obj/
+INC					= include/
+SRC_DIR				= src/
+OBJ_DIR				= obj/
 
 # Compiler and CFlags
 CC                  = cc
-CFLAGS              = -Wall -Werror -Wextra -g -pthread
-RM                  = rm -f
+CFLAGS              = -Wall -Werror -Wextra
+RM                  = rm -rf
 
 # Source files
-SRCS                = main.c init_philo.c send_error.c debug.c check_args.c routine.c
+SRCS				= main.c init_philo.c utils.c debug.c check_args.c routine.c
 
 # File paths
-SRC                 = $(addprefix $(SRC_DIR), $(SRCS))
-OBJ                 = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
+SRC					= $(addprefix $(SRC_DIR), $(SRCS))
+OBJ					= $(addprefix $(OBJ_DIR), $(SRCS:.c=.o))
 
-all:                $(NAME)
+all:	$(NAME)
 
 $(LIBFT):
 	@echo "Compiling libft..."
@@ -50,10 +50,10 @@ obj:
 # Compile object files from source files
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(@D)
-	@$(CC) -g $(CFLAGS) -I$(INC) -c $< -o $@
+	@$(CC) $(CFLAGS) -I$(INC) -c $< -o $@
 #	@echo "\033[1;32mFile $@ created.\033[0m";
 
-$(NAME): $(LIBFT) $(OBJ) 
+$(NAME): $(LIBFT) obj $(OBJ) 
 	@echo "\033[1;36mCompiling...\033[0m"
 	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
 	@echo "\033[1;32mDone.\033[0m"
@@ -77,4 +77,4 @@ re: fclean obj all
 debug: re
 debug: $(CFLAGS) += -g3 -D DEBUG=1
 
-.PHONY: all obj clean fclean re
+.PHONY: all obj clean fclean re debug

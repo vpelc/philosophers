@@ -6,7 +6,7 @@
 /*   By: vpelc <vpelc@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:01:33 by vpelc             #+#    #+#             */
-/*   Updated: 2024/11/20 18:05:53 by vpelc            ###   ########.fr       */
+/*   Updated: 2024/11/21 14:31:20 by vpelc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_philo
 	pthread_t		thread;
 	pthread_mutex_t	own_fork;
 	pthread_mutex_t	*next_fork;
-	t_life			*life;
+	struct s_life	*life;
 }					t_philo;
 
 typedef struct s_life

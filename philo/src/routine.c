@@ -6,7 +6,7 @@
 /*   By: vpelc <vpelc@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 19:07:40 by vpelc             #+#    #+#             */
-/*   Updated: 2024/11/20 18:29:25 by vpelc            ###   ########.fr       */
+/*   Updated: 2024/11/21 14:27:41 by vpelc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,13 @@ void	*routine(void *philosopher)
 	t_philo	*philo;
 	
 	philo = (t_philo *)philosopher;
-	printf("I'm ok\n");
+	if (philo->id % 2 == 0)
+		usleep(1000);
+	while (!philo->life->dead)
+	{
+		eating(philo);
+		sleeping(philo);
+	}
 	return (philosopher);
 }
 
@@ -81,6 +87,7 @@ void	eating(t_philo *philo)
 	mutex_print("has taken a fork\n", philo);
 	pthread_mutex_lock((philo->next_fork));
 	mutex_print("has taken a fork\n", philo);
+	mutex_print("is eating\n", philo);
 	ft_usleep(philo->life->time_to_eat);
 	pthread_mutex_unlock(&(philo->own_fork));
 	pthread_mutex_unlock((philo->next_fork));
@@ -89,5 +96,7 @@ void	eating(t_philo *philo)
 
 void	sleeping(t_philo *philo)
 {
+	mutex_print("is sleeping\n", philo);
 	ft_usleep(philo->life->time_to_sleep);
+	mutex_print("is thinking\n", philo);
 }
