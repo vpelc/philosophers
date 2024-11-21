@@ -6,7 +6,7 @@
 #    By: vpelc <vpelc@student.s19.be>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/10 17:59:30 by vpelc             #+#    #+#              #
-#    Updated: 2024/10/28 19:01:23 by vpelc            ###   ########.fr        #
+#    Updated: 2024/11/15 16:02:18 by vpelc            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ CFLAGS              = -Wall -Werror -Wextra -g -pthread
 RM                  = rm -f
 
 # Source files
-SRCS                = main.c init_philo.c send_error.c debug.c check_args.c
+SRCS                = main.c init_philo.c send_error.c debug.c check_args.c routine.c
 
 # File paths
 SRC                 = $(addprefix $(SRC_DIR), $(SRCS))
@@ -73,5 +73,8 @@ fclean: clean
 	@echo "\033[1;32mDone.\033[0m"
 
 re: fclean obj all
+
+debug: re
+debug: $(CFLAGS) += -g3 -D DEBUG=1
 
 .PHONY: all obj clean fclean re

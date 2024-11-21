@@ -6,7 +6,7 @@
 /*   By: vpelc <vpelc@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:01:33 by vpelc             #+#    #+#             */
-/*   Updated: 2024/10/28 19:02:57 by vpelc            ###   ########.fr       */
+/*   Updated: 2024/11/20 18:05:53 by vpelc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,12 @@ typedef struct s_philo
 	int				id;
 	int				meals;
 	int				sleeps;
+	int				death_status;
+	unsigned long	lastmeal_time;
 	pthread_t		thread;
 	pthread_mutex_t	own_fork;
 	pthread_mutex_t	*next_fork;
+	t_life			*life;
 }					t_philo;
 
 typedef struct s_life
@@ -37,12 +40,17 @@ typedef struct s_life
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				nbr_meals;
+	int				dead;
+	unsigned long	prog_start_time;
+	pthread_t		monitor;
+	pthread_mutex_t	print;
 	t_philo			*philo_arr;
 }					t_life;
 
 /*			SRC				*/
 void				init_life(int argc, char *argv[], t_life *life);
 void				check_args(int argc, char *argv[]);
+int					birth(t_life *life);
 
 void				send_error(char *err);
 
