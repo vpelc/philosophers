@@ -6,7 +6,7 @@
 /*   By: vpelc <vpelc@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:01:33 by vpelc             #+#    #+#             */
-/*   Updated: 2024/11/21 14:31:20 by vpelc            ###   ########.fr       */
+/*   Updated: 2024/11/21 19:36:24 by vpelc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,13 @@ typedef struct s_life
 /*			SRC				*/
 void				init_life(int argc, char *argv[], t_life *life);
 void				check_args(int argc, char *argv[]);
+
 int					birth(t_life *life);
+void				eating(t_philo *philo);
+void				sleeping(t_philo *philo);
+
+size_t				ft_get_time_ms(void);
+void				ft_usleep(size_t time);
 
 void				send_error(char *err);
 

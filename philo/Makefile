@@ -6,19 +6,18 @@
 #    By: vpelc <vpelc@student.s19.be>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/10 17:59:30 by vpelc             #+#    #+#              #
-#    Updated: 2024/11/21 17:35:48 by vpelc            ###   ########.fr        #
+#    Updated: 2024/11/21 18:48:11 by vpelc            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
 
 # Standard
 NAME				= philo
 
 # Directories
 LIBFT				= ./libft/libft.a
-INC					= include/
-SRC_DIR				= src/
-OBJ_DIR				= obj/
+INC					= ./include/
+SRC_DIR				= ./src/
+OBJ_DIR				= ./obj/
 
 # Compiler and CFlags
 CC                  = cc
@@ -30,7 +29,7 @@ SRCS				= main.c init_philo.c utils.c debug.c check_args.c routine.c
 
 # File paths
 SRC					= $(addprefix $(SRC_DIR), $(SRCS))
-OBJ					= $(addprefix $(OBJ_DIR), $(SRCS:.c=.o))
+OBJ					= $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 
 all:	$(NAME)
 
@@ -55,7 +54,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 
 $(NAME): $(LIBFT) obj $(OBJ) 
 	@echo "\033[1;36mCompiling...\033[0m"
-	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
+	@$(CC) $(CFLAGS) $(LIBFT) $(OBJ) -o $(NAME)
 	@echo "\033[1;32mDone.\033[0m"
 
 clean:
@@ -74,7 +73,7 @@ fclean: clean
 
 re: fclean obj all
 
-debug: re
-debug: $(CFLAGS) += -g3 -D DEBUG=1
+#debug: re
+#debug: $(CFLAGS) += -g3 -D DEBUG=1
 
 .PHONY: all obj clean fclean re debug

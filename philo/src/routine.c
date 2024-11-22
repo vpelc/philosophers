@@ -6,7 +6,7 @@
 /*   By: vpelc <vpelc@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 19:07:40 by vpelc             #+#    #+#             */
-/*   Updated: 2024/11/21 14:27:41 by vpelc            ###   ########.fr       */
+/*   Updated: 2024/11/21 19:41:47 by vpelc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ void	*monitoring(void *story)
 		if (life->philo_arr[i].death_status != 0)
 		{
 			life->dead = 1;
-			return (1);
+			return (NULL);
 		}
 	}
-	return (0);
+	return (NULL);
 }
 
 int	birth(t_life *life)
@@ -74,7 +74,7 @@ void	mutex_print(char *str, t_philo *philo)
 	pthread_mutex_lock(&(philo->life->print));
 	if (!philo->life->dead)
 	{
-		printf("%-12lli", ft_get_time_ms());
+		printf("%-12zu", (ft_get_time_ms() - philo->life->prog_start_time));
 		printf("%-4d", philo->id);
 		printf("%s\n", str);
 	}
