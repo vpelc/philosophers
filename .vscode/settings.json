@@ -3,6 +3,7 @@
 		"main.h": "c",
 		"time.h": "c",
 		"unistd.h": "c",
-		"limits.h": "c"
+		"limits.h": "c",
+		"__locale": "c"
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: vpelc <vpelc@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 17:10:33 by vpelc             #+#    #+#             */
-/*   Updated: 2024/11/21 19:33:56 by vpelc            ###   ########.fr       */
+/*   Updated: 2024/11/27 17:32:01 by vpelc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,34 @@ void	ft_usleep(size_t time)
 
 	start = ft_get_time_ms();
 	while ((ft_get_time_ms() - start) < time)
-		usleep(50);
+		usleep(10);
+}
+
+void	mutex_print(char *str, t_philo *philo)
+{
+	pthread_mutex_lock(&(philo->life->print));
+	pthread_mutex_lock(&philo->life->death_check);
+	pthread_mutex_lock(&philo->life->meal_check);
+	if (!philo->life->dead && !philo->life->end)
+	{
+		printf("\033[1;35m%-10zu\033[0m", (ft_get_time_ms() - philo->life->prog_start_time));
+		printf("\033[1;33m%-4d\033[0m", philo->id);
+		printf("%-30s", str);
+		if (philo->life->nbr_meals >= 0)
+			printf("\033[1;35m%i\033[0m", philo->meals);
+		printf("\n\n");
+	}
+	pthread_mutex_unlock(&philo->life->death_check);
+	pthread_mutex_unlock(&philo->life->meal_check);
+	pthread_mutex_unlock(&(philo->life->print));
+}
+
+void	mutex_print_f(char *str, t_philo *philo)
+{
+	pthread_mutex_lock(&(philo->life->print));
+	printf("\033[1;35m%-10zu\033[0m", (ft_get_time_ms() - philo->life->prog_start_time));
+	printf("\033[1;33m%-4d\033[0m", philo->id);
+	printf("%-30s", str);
+	printf("\n\n");
+	pthread_mutex_unlock(&(philo->life->print));
 }

@@ -6,7 +6,7 @@
 /*   By: vpelc <vpelc@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 14:21:32 by vpelc             #+#    #+#             */
-/*   Updated: 2024/11/20 14:08:02 by vpelc            ###   ########.fr       */
+/*   Updated: 2024/11/27 17:39:28 by vpelc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,15 @@ void	check_args(int argc, char *argv[])
 			j++;
 		}
 	}
+}
+
+void	check_args_2(t_life *life)
+{
+	if (life->nbr_philo < 1)
+		send_error("\n. Not enough philosopher\n\n");
+	if (life->nbr_philo > 200)
+		send_error("\n. Too many philosophers\n\n");
+	if (life->time_to_die < 60 || life->time_to_sleep < 60
+		|| life->time_to_eat < 60)
+		send_error("\n. Time too low\n\n");
 }
