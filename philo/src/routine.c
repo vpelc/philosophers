@@ -6,7 +6,7 @@
 /*   By: vpelc <vpelc@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 19:07:40 by vpelc             #+#    #+#             */
-/*   Updated: 2024/11/27 18:06:21 by vpelc            ###   ########.fr       */
+/*   Updated: 2024/11/29 13:50:00 by vpelc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ void	*routine(void *philosopher)
 	t_philo	*philo;
 
 	philo = (t_philo *)philosopher;
-	// if (philo->id % 2 == 0)
-	// 	usleep(1000);
 	while (!philo->life->dead && !philo->life->end)
 	{
 		pthread_mutex_lock(&philo->life->death_check);
@@ -33,8 +31,6 @@ void	*routine(void *philosopher)
 	return (philosopher);
 }
 
-
-
 int	birth(t_life *life)
 {
 	int	i;
@@ -44,10 +40,10 @@ int	birth(t_life *life)
 	while (++i < life->nbr_philo)
 	{
 		life->philo_arr[i].lastmeal_time = life->prog_start_time;
-		if (pthread_create(&life->philo_arr[i].thread, NULL, routine, &(life->philo_arr[i])) != 0)
+		if (pthread_create(&life->philo_arr[i].thread, NULL,
+				routine, &(life->philo_arr[i])) != 0)
 			return (i);
 	}
-
 	return (0);
 }
 
@@ -91,5 +87,4 @@ void	eating(t_philo *philo)
 	ft_usleep(philo->life->time_to_eat);
 	pthread_mutex_unlock(&(philo->left_fork));
 	pthread_mutex_unlock((philo->right_fork));
-	
 }

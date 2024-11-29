@@ -6,15 +6,15 @@
 /*   By: vpelc <vpelc@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 14:45:40 by vpelc             #+#    #+#             */
-/*   Updated: 2024/11/27 16:46:00 by vpelc            ###   ########.fr       */
+/*   Updated: 2024/11/29 13:34:02 by vpelc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/main.h"
 
-int death(t_life *life)
+int	death(t_life *life)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (++i < life->nbr_philo)
@@ -23,18 +23,17 @@ int death(t_life *life)
 			return (i);
 	}
 	if (pthread_mutex_destroy(&(life->print)) != 0)
-			return (i);
+		return (i);
 	if (pthread_mutex_destroy(&(life->death_check)) != 0)
-			return (i);
+		return (i);
 	if (pthread_mutex_destroy(&(life->meal_check)) != 0)
-			return (i);
+		return (i);
 	return (0);
-	
 }
 
 int	rest(t_life *life)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (++i < life->nbr_philo)
@@ -42,7 +41,5 @@ int	rest(t_life *life)
 		if (pthread_join(life->philo_arr[i].thread, NULL) != 0)
 			return (i);
 	}
-
 	return (0);
 }
-

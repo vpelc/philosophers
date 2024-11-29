@@ -6,7 +6,7 @@
 /*   By: vpelc <vpelc@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:01:33 by vpelc             #+#    #+#             */
-/*   Updated: 2024/11/27 17:32:11 by vpelc            ###   ########.fr       */
+/*   Updated: 2024/11/29 13:49:50 by vpelc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void				check_args_2(t_life *life);
 
 /* thread routines */
 void				*routine(void *philosopher);
-int					monitoring(t_life *life);
+void				monitoring(t_life *life);
 
 /* philo actions */
 int					birth(t_life *life);
