@@ -6,7 +6,7 @@
 #    By: vpelc <vpelc@student.s19.be>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/10 17:59:30 by vpelc             #+#    #+#              #
-#    Updated: 2024/11/29 13:43:50 by vpelc            ###   ########.fr        #
+#    Updated: 2024/12/04 12:54:42 by vpelc            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ OBJ_DIR				= ./obj/
 
 # Compiler and CFlags
 CC                  = cc
-CFLAGS              = -Wall -Werror -Wextra -fsanitize=thread
+CFLAGS              = -Wall -Werror -Wextra #-fsanitize=thread
 RM                  = rm -rf
 
 # Source files

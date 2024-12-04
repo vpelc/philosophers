@@ -6,7 +6,7 @@
 /*   By: vpelc <vpelc@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 17:10:11 by vpelc             #+#    #+#             */
-/*   Updated: 2024/11/29 13:41:24 by vpelc            ###   ########.fr       */
+/*   Updated: 2024/12/04 13:04:37 by vpelc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	monitoring(t_life *life)
 		if ((ft_get_time_ms() - life->philo_arr[i].lastmeal_time)
 			>= (unsigned long)life->time_to_die)
 		{
-			mutex_print_f("\033[1;31mis dead\033[0m", &life->philo_arr[i]);
+			mutex_print_f("\033[1;31mdied\033[0m", &life->philo_arr[i]);
 			life->dead = 1;
 			pthread_mutex_unlock(&life->death_check);
 			return ;

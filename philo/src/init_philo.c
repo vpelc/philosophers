@@ -6,7 +6,7 @@
 /*   By: vpelc <vpelc@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 13:35:23 by vpelc             #+#    #+#             */
-/*   Updated: 2024/11/27 16:59:34 by vpelc            ###   ########.fr       */
+/*   Updated: 2024/12/04 13:01:10 by vpelc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_philo	*init_philo(t_life *life)
 	i = -1;
 	while (life->nbr_philo > ++i)
 	{
-		philo_arr[i].id = i;
+		philo_arr[i].id = i + 1;
 		philo_arr[i].meals = 0;
 		philo_arr[i].sleeps = 0;
 		pthread_mutex_init(&philo_arr[i].left_fork, NULL);
