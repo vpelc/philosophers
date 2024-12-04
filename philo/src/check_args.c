@@ -6,7 +6,7 @@
 /*   By: vpelc <vpelc@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 14:21:32 by vpelc             #+#    #+#             */
-/*   Updated: 2024/11/28 13:07:29 by vpelc            ###   ########.fr       */
+/*   Updated: 2024/12/04 14:13:23 by vpelc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,13 @@ void	check_args(int argc, char *argv[])
 		send_error("\n. Too much arguments\n\n");
 	while (++i < argc)
 	{
+		if (ft_strlen(argv[i]) > 11)
+			send_error("\n. Numbers need to be within INT limits\n\n");
 		j = 0;
 		while (argv[i][j])
 		{
-			if (!(ft_isdigit(argv[i][j])))
+			if (!(ft_isdigit(argv[i][j]))
+			&& (argv[i][j] != '+' && argv[i][j] != '-'))
 				send_error("\n. Arguments contains non digit char\n\n");
 			j++;
 		}
